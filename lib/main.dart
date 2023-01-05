@@ -10,11 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Show Dialog",
+      title: "Buttom Sheet",
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: "Show Dialog"),
+      home: const MyHomePage(title: "Buttom Sheet"),
     );
   }
 }
@@ -40,67 +40,52 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           ElevatedButton(
             onPressed: () {
-              Get.defaultDialog(
-                title: "Dialog Title",
-                titleStyle: TextStyle(
-                  fontSize: 25,
-                ),
-                middleText: "This is middle text",
-                middleTextStyle: TextStyle(
-                  fontSize: 20,
-                ),
-                backgroundColor: Colors.grey,
-                radius: 80,
-
-                // To customize the middle text
-                content: Row(
-                  children: [
-                    CircularProgressIndicator(),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Expanded(
-                      child: Text("Data Loading"),
-                    ),
-                  ],
-                ),
-
-                // Default cancel and confirm action
-                textCancel: "Calcel",
-                cancelTextColor: Colors.white,
-                textConfirm: "Comfirm",
-                confirmTextColor: Colors.white,
-                onCancel: () {
-                  Get.back();
-                },
-                onConfirm: () {},
-                // Color for default cancel and confirm button
-                buttonColor: Colors.green,
-                confirm: Text(
-                  "Confirms",
-                  style: TextStyle(
-                    color: Colors.white,
+              Get.bottomSheet(
+                Container(
+                  child: Wrap(
+                    children: <Widget>[
+                      ListTile(
+                        leading: Icon(
+                          Icons.wb_sunny_outlined,
+                        ),
+                        title: Text(
+                          "Light Theme",
+                        ),
+                        onTap: () {
+                          Get.changeTheme(ThemeData.light());
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.wb_sunny,
+                        ),
+                        title: Text(
+                          "Dark Theme",
+                        ),
+                        onTap: () {
+                          Get.changeTheme(ThemeData.dark());
+                        },
+                      ),
+                    ],
                   ),
                 ),
-                cancel: Text(
-                  "Cancels",
-                  style: TextStyle(color: Colors.white),
+                barrierColor: Colors.greenAccent.shade100,
+                backgroundColor: Colors.pinkAccent,
+                isDismissible: false,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Colors.white,
+                    style: BorderStyle.solid,
+                    width: 2.0,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    10.0,
+                  ),
                 ),
-                // actions: [
-                //   ElevatedButton(
-                //     // onPressed: Get.back(),
-                //     onPressed: () {},
-                //     child: Text("Action-1"),
-                //   ),
-                //   ElevatedButton(
-                //     onPressed: () {},
-                //     child: Text("Action-2"),
-                //   )
-                // ],
-                barrierDismissible: false,
+                enableDrag: false,
               );
             },
-            child: Text("Show Dialog"),
+            child: Text("Buttom Sheet"),
           ),
         ],
       )),
