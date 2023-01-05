@@ -10,11 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Snackbar',
+      title: "Show Dialog",
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Snackbar'),
+      home: const MyHomePage(title: "Show Dialog"),
     );
   }
 }
@@ -40,57 +40,67 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           ElevatedButton(
             onPressed: () {
-              Get.snackbar(
-                "Snackbar Title", "Elevated button is pressed",
-                snackPosition: SnackPosition.BOTTOM,
-                // titleText: Text("snackbar Title"),
-                // messageText: Text("Elevated button is pressed"),
-                colorText: Colors.blue,
-                backgroundColor: Colors.white,
-                // borderRadius: 30,
-                margin: EdgeInsets.all(10),
-                // maxWidth: 100,
-                // animationDuration: Duration(milliseconds: 3000),
-                backgroundGradient: LinearGradient(
-                  colors: [
-                    Colors.red,
-                    Colors.purple,
+              Get.defaultDialog(
+                title: "Dialog Title",
+                titleStyle: TextStyle(
+                  fontSize: 25,
+                ),
+                middleText: "This is middle text",
+                middleTextStyle: TextStyle(
+                  fontSize: 20,
+                ),
+                backgroundColor: Colors.grey,
+                radius: 80,
+
+                // To customize the middle text
+                content: Row(
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: Text("Data Loading"),
+                    ),
                   ],
                 ),
-                // borderColor: Colors.deepOrange,
-                // borderWidth: 4,
-                // boxShadows: [
-                //   BoxShadow(
-                //     color: Colors.yellow,
-                //     offset: Offset(30, 50),
-                //     spreadRadius: 20,
-                //     blurRadius: 8,
-                //   ),
-                // ],
-                isDismissible: true,
-                dismissDirection: DismissDirection.horizontal,
-                // forwardAnimationCurve: Curves.bounceInOut,
-                // duration: Duration(milliseconds: 8000),
-                icon: Icon(
-                  Icons.send,
-                  color: Colors.white,
-                ),
-                shouldIconPulse: false,
-                // leftBarIndicatorColor: Colors.white,
-                mainButton: TextButton(
-                  onPressed: () {},
-                  child: Text("Retry"),
-                ),
-                onTap: (snack) {
-                  print("Snackbar Clicked");
+
+                // Default cancel and confirm action
+                textCancel: "Calcel",
+                cancelTextColor: Colors.white,
+                textConfirm: "Comfirm",
+                confirmTextColor: Colors.white,
+                onCancel: () {
+                  Get.back();
                 },
-                overlayBlur: 5,
-                overlayColor: Colors.grey,
-                padding: EdgeInsets.all(20),
-                showProgressIndicator: true,
+                onConfirm: () {},
+                // Color for default cancel and confirm button
+                buttonColor: Colors.green,
+                confirm: Text(
+                  "Confirms",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                cancel: Text(
+                  "Cancels",
+                  style: TextStyle(color: Colors.white),
+                ),
+                // actions: [
+                //   ElevatedButton(
+                //     // onPressed: Get.back(),
+                //     onPressed: () {},
+                //     child: Text("Action-1"),
+                //   ),
+                //   ElevatedButton(
+                //     onPressed: () {},
+                //     child: Text("Action-2"),
+                //   )
+                // ],
+                barrierDismissible: false,
               );
             },
-            child: Text("Show Snackbar"),
+            child: Text("Show Dialog"),
           ),
         ],
       )),
